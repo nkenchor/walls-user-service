@@ -1,0 +1,3594 @@
+definitions:
+  dto.AddIdentificationDto:
+    properties:
+      document_reference:
+        type: string
+      expiry:
+        type: string
+      identification_number:
+        type: string
+      type:
+        $ref: '#/definitions/shared.IdentificationType'
+    required:
+    - document_reference
+    - expiry
+    - identification_number
+    type: object
+  dto.AddressDto:
+    properties:
+      address:
+        $ref: '#/definitions/entity.Address'
+    required:
+    - address
+    type: object
+  dto.BalanceDto:
+    properties:
+      available_amount:
+        type: number
+      book_amount:
+        type: number
+    required:
+    - available_amount
+    - book_amount
+    type: object
+  dto.BankDto:
+    properties:
+      account_name:
+        minLength: 3
+        type: string
+      account_number:
+        minimum: 1000000000
+        type: integer
+      bank_name:
+        minLength: 3
+        type: string
+      is_default:
+        type: boolean
+    required:
+    - account_name
+    - account_number
+    - bank_name
+    type: object
+  dto.CardDto:
+    properties:
+      card_name:
+        minLength: 3
+        type: string
+      expiry_month:
+        maximum: 12
+        minimum: 1
+        type: integer
+      expiry_year:
+        type: integer
+      is_default:
+        type: boolean
+      pan:
+        type: string
+    required:
+    - card_name
+    - expiry_month
+    - expiry_year
+    - pan
+    type: object
+  dto.CompanyWallsBadgeDto:
+    properties:
+      company_profile_reference:
+        maxLength: 38
+        minLength: 32
+        type: string
+      walls_tag:
+        type: string
+    required:
+    - company_profile_reference
+    - walls_tag
+    type: object
+  dto.ContactDto:
+    properties:
+      full_name:
+        minLength: 3
+        type: string
+      is_beneficiary:
+        type: boolean
+      phone:
+        type: string
+      walls_tag:
+        type: string
+    required:
+    - full_name
+    - phone
+    - walls_tag
+    type: object
+  dto.CouponDto:
+    properties:
+      coupon_id:
+        type: string
+      coupon_reference:
+        type: string
+      discount_percentage:
+        minimum: 1
+        type: number
+      expiry_date:
+        type: string
+    required:
+    - coupon_id
+    - coupon_reference
+    - discount_percentage
+    - expiry_date
+    type: object
+  dto.CreateCompanyProfileDto:
+    properties:
+      address:
+        $ref: '#/definitions/entity.Address'
+      company_name:
+        maxLength: 50
+        minLength: 5
+        type: string
+      email:
+        type: string
+      is_verified_email:
+        type: boolean
+      logo:
+        $ref: '#/definitions/entity.Photo'
+      phone:
+        type: string
+      registration_date:
+        type: string
+      registration_no:
+        maxLength: 50
+        minLength: 5
+        type: string
+    required:
+    - address
+    - company_name
+    - email
+    - logo
+    - phone
+    - registration_date
+    - registration_no
+    type: object
+  dto.CreateOtpDto:
+    properties:
+      channel:
+        $ref: '#/definitions/shared.Channel'
+      contact:
+        type: string
+      device:
+        $ref: '#/definitions/dto.DeviceDto'
+    required:
+    - contact
+    - device
+    type: object
+  dto.CreateUserDto:
+    properties:
+      phone:
+        type: string
+    required:
+    - phone
+    type: object
+  dto.DeviceDto:
+    properties:
+      brand:
+        type: string
+      device_reference:
+        maxLength: 38
+        minLength: 32
+        type: string
+      imei:
+        maxLength: 50
+        minLength: 10
+        type: string
+      model:
+        type: string
+      type:
+        $ref: '#/definitions/shared.DeviceType'
+    required:
+    - brand
+    - device_reference
+    - imei
+    - model
+    type: object
+  dto.DobDto:
+    properties:
+      date_of_birth:
+        type: string
+    required:
+    - date_of_birth
+    type: object
+  dto.EmailDto:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  dto.IdentificationDto:
+    properties:
+      document_reference:
+        type: string
+      expiry:
+        type: string
+      identification_number:
+        type: string
+      identification_reference:
+        type: string
+      is_verified:
+        type: boolean
+      type:
+        type: string
+      verification_method:
+        type: string
+      verified_on:
+        type: string
+    required:
+    - document_reference
+    - expiry
+    - identification_number
+    - identification_reference
+    - type
+    - verification_method
+    - verified_on
+    type: object
+  dto.IdentityDto:
+    properties:
+      device:
+        $ref: '#/definitions/dto.DeviceDto'
+      phone:
+        description: Must be a valid E.164 format phone number
+        type: string
+    required:
+    - device
+    - phone
+    type: object
+  dto.KycDto:
+    properties:
+      identifications:
+        items:
+          $ref: '#/definitions/dto.IdentificationDto'
+        minItems: 1
+        type: array
+      is_verified:
+        type: boolean
+      kyc_score:
+        type: number
+    required:
+    - identifications
+    type: object
+  dto.KycScoreDto:
+    properties:
+      kyc_score:
+        type: number
+    required:
+    - kyc_score
+    type: object
+  dto.PhotoDto:
+    properties:
+      photo:
+        $ref: '#/definitions/entity.Photo'
+    required:
+    - photo
+    type: object
+  dto.RewardDto:
+    properties:
+      points:
+        minimum: 1
+        type: integer
+    required:
+    - points
+    type: object
+  dto.TierDto:
+    properties:
+      daily_transaction_limit:
+        type: number
+      minimum_balance:
+        minimum: 0
+        type: number
+      name:
+        type: string
+      reference:
+        type: string
+      tier_amount:
+        minimum: 0
+        type: number
+      tier_type:
+        type: string
+      transaction_limit:
+        type: number
+      upgrade_options:
+        items:
+          type: string
+        type: array
+    required:
+    - name
+    - reference
+    type: object
+  dto.TierUpgradeRequestDto:
+    properties:
+      current_tier:
+        $ref: '#/definitions/dto.TierDto'
+      request_reference:
+        type: string
+      requested_tier:
+        $ref: '#/definitions/dto.TierDto'
+      user:
+        $ref: '#/definitions/dto.UserDto'
+    required:
+    - current_tier
+    - request_reference
+    - requested_tier
+    - user
+    type: object
+  dto.UpdateCompanyLogo:
+    properties:
+      logo:
+        $ref: '#/definitions/entity.Photo'
+    required:
+    - logo
+    type: object
+  dto.UpdateCompanyProfileDto:
+    properties:
+      address:
+        $ref: '#/definitions/entity.Address'
+      email:
+        type: string
+      phone:
+        type: string
+    required:
+    - address
+    - email
+    - phone
+    type: object
+  dto.UpdateDeviceDto:
+    properties:
+      new_device:
+        $ref: '#/definitions/entity.Device'
+    required:
+    - new_device
+    type: object
+  dto.UpdateNotificationOptionsDto:
+    properties:
+      notification_type:
+        $ref: '#/definitions/shared.NotificationType'
+      otp_type:
+        type: integer
+      push_notification_enabled:
+        type: boolean
+    type: object
+  dto.UpdateWalletDto:
+    properties:
+      auto_fund:
+        type: boolean
+      auto_fund_amount:
+        type: number
+      auto_fund_level:
+        type: number
+      auto_withdrawal:
+        type: boolean
+      auto_withdrawal_amount:
+        type: number
+      auto_withdrawal_level:
+        type: number
+    type: object
+  dto.UserDto:
+    properties:
+      bank_accounts:
+        items:
+          $ref: '#/definitions/entity.Bank'
+        type: array
+      cards:
+        items:
+          $ref: '#/definitions/entity.Card'
+        type: array
+      company_profile:
+        items:
+          $ref: '#/definitions/entity.CompanyProfile'
+        type: array
+      contacts:
+        items:
+          $ref: '#/definitions/entity.Contact'
+        type: array
+      created_on:
+        type: string
+      device:
+        $ref: '#/definitions/entity.Device'
+      is_active:
+        type: boolean
+      kyc:
+        $ref: '#/definitions/dto.KycDto'
+      last_synced_on:
+        type: string
+      notification_options:
+        $ref: '#/definitions/entity.NotificationOptions'
+      security:
+        $ref: '#/definitions/entity.Security'
+      updated_on:
+        type: string
+      user_profile:
+        $ref: '#/definitions/entity.UserProfile'
+      user_reference:
+        type: string
+      wallet:
+        $ref: '#/definitions/dto.WalletDto'
+    type: object
+  dto.UserNameDto:
+    properties:
+      first_name:
+        maxLength: 20
+        minLength: 3
+        type: string
+      last_name:
+        maxLength: 20
+        minLength: 3
+        type: string
+    required:
+    - first_name
+    - last_name
+    type: object
+  dto.UserWallsBadgeDto:
+    properties:
+      walls_tag:
+        type: string
+    required:
+    - walls_tag
+    type: object
+  dto.ValidateOtpDto:
+    properties:
+      contact:
+        type: string
+      device:
+        $ref: '#/definitions/dto.DeviceDto'
+      otp:
+        type: string
+    required:
+    - device
+    - otp
+    type: object
+  dto.WalletDto:
+    properties:
+      auto_fund:
+        type: boolean
+      auto_fund_amount:
+        type: number
+      auto_fund_level:
+        type: number
+      auto_withdrawal:
+        type: boolean
+      auto_withdrawal_amount:
+        type: number
+      auto_withdrawal_level:
+        type: number
+      balance:
+        $ref: '#/definitions/entity.Balance'
+      coupons:
+        items:
+          $ref: '#/definitions/entity.Coupon'
+        minItems: 1
+        type: array
+      reward:
+        $ref: '#/definitions/entity.Reward'
+      tier:
+        $ref: '#/definitions/dto.TierDto'
+      wallet_account_no:
+        minimum: 1000000000
+        type: integer
+      wallet_reference:
+        maxLength: 38
+        minLength: 32
+        type: string
+    required:
+    - auto_fund_amount
+    - auto_fund_level
+    - auto_withdrawal_amount
+    - auto_withdrawal_level
+    - balance
+    - coupons
+    - reward
+    - tier
+    - wallet_account_no
+    - wallet_reference
+    type: object
+  entity.Address:
+    properties:
+      address_lines:
+        items:
+          type: string
+        minItems: 1
+        type: array
+      address_reference:
+        type: string
+      city:
+        minLength: 3
+        type: string
+      country:
+        $ref: '#/definitions/entity.Country'
+      state:
+        $ref: '#/definitions/entity.State'
+    required:
+    - address_lines
+    - address_reference
+    - city
+    - country
+    - state
+    type: object
+  entity.Balance:
+    properties:
+      available_amount:
+        type: number
+      currency:
+        type: string
+      is_synced:
+        type: boolean
+      last_synced_on:
+        type: string
+      pending_incoming_amount:
+        type: number
+    type: object
+  entity.Bank:
+    properties:
+      account_name:
+        type: string
+      account_number:
+        type: integer
+      bank_name:
+        type: string
+      bank_reference:
+        type: string
+      integration_reference:
+        type: string
+      integration_type:
+        $ref: '#/definitions/shared.IntegrationType'
+      is_default:
+        type: boolean
+    type: object
+  entity.Card:
+    properties:
+      card_name:
+        type: string
+      card_reference:
+        type: string
+      expiry_month:
+        type: integer
+      expiry_year:
+        type: integer
+      integration_reference:
+        type: string
+      integration_type:
+        $ref: '#/definitions/shared.IntegrationType'
+      is_default:
+        type: boolean
+      pan:
+        type: string
+    type: object
+  entity.CompanyProfile:
+    properties:
+      address:
+        $ref: '#/definitions/entity.Address'
+      company_name:
+        type: string
+      company_profile_reference:
+        type: string
+      email:
+        type: string
+      is_active:
+        type: boolean
+      is_verified_email:
+        type: boolean
+      logo:
+        $ref: '#/definitions/entity.Photo'
+      phone:
+        type: string
+      registration_date:
+        type: string
+      registration_no:
+        type: string
+      walls_badge:
+        items:
+          $ref: '#/definitions/entity.WallsBadge'
+        type: array
+    type: object
+  entity.Contact:
+    properties:
+      contact_reference:
+        type: string
+      full_name:
+        type: string
+      is_beneficiary:
+        type: boolean
+      phone:
+        type: string
+      walls_tag:
+        type: string
+    type: object
+  entity.Country:
+    properties:
+      country_code:
+        type: string
+      country_name:
+        minLength: 3
+        type: string
+      country_reference:
+        type: string
+      dial_code:
+        minLength: 2
+        type: string
+    required:
+    - country_code
+    - country_name
+    - country_reference
+    - dial_code
+    type: object
+  entity.Coupon:
+    properties:
+      coupon_id:
+        type: string
+      coupon_reference:
+        type: string
+      discount_percentage:
+        minimum: 1
+        type: number
+      expiry_date:
+        type: string
+    required:
+    - coupon_id
+    - coupon_reference
+    - discount_percentage
+    - expiry_date
+    type: object
+  entity.Device:
+    properties:
+      brand:
+        type: string
+      device_reference:
+        type: string
+      imei:
+        type: string
+      model:
+        type: string
+      type:
+        $ref: '#/definitions/shared.DeviceType'
+    required:
+    - brand
+    - device_reference
+    - imei
+    - model
+    type: object
+  entity.Identification:
+    properties:
+      document_reference:
+        type: string
+      expiry:
+        type: string
+      identification_number:
+        type: string
+      identification_reference:
+        type: string
+      is_verified:
+        type: boolean
+      type:
+        $ref: '#/definitions/shared.IdentificationType'
+      verification_method:
+        type: string
+      verified_on:
+        type: string
+    type: object
+  entity.Kyc:
+    properties:
+      identifications:
+        items:
+          $ref: '#/definitions/entity.Identification'
+        type: array
+      is_verified:
+        type: boolean
+      kyc_score:
+        type: number
+      profile_type:
+        $ref: '#/definitions/shared.ProfileType'
+    type: object
+  entity.NotificationOptions:
+    properties:
+      notification_type:
+        $ref: '#/definitions/shared.NotificationType'
+      otp_type:
+        type: integer
+      push_notification_enabled:
+        type: boolean
+    type: object
+  entity.Photo:
+    properties:
+      document_reference:
+        type: string
+      is_default:
+        type: boolean
+      is_verified:
+        type: boolean
+      photo_reference:
+        type: string
+    required:
+    - document_reference
+    - photo_reference
+    type: object
+  entity.Reward:
+    properties:
+      points:
+        minimum: 1
+        type: integer
+    required:
+    - points
+    type: object
+  entity.Security:
+    properties:
+      face_id_enabled:
+        type: boolean
+      failed_login_attempts:
+        type: integer
+      fingerprint_enabled:
+        type: boolean
+      last_failed_login_on:
+        type: string
+      password_last_updated_on:
+        type: string
+      transaction_pin_enabled:
+        type: boolean
+      two_factor_auth_enabled:
+        type: boolean
+      two_factor_auth_method:
+        type: string
+    type: object
+  entity.State:
+    properties:
+      state_name:
+        minLength: 3
+        type: string
+      state_reference:
+        type: string
+    required:
+    - state_name
+    - state_reference
+    type: object
+  entity.Tier:
+    properties:
+      daily_transaction_limit:
+        type: number
+      minimum_balance:
+        minimum: 0
+        type: number
+      name:
+        type: string
+      reference:
+        type: string
+      tier_amount:
+        minimum: 0
+        type: number
+      tier_type:
+        $ref: '#/definitions/shared.TierType'
+      transaction_limit:
+        type: number
+      upgrade_options:
+        items:
+          type: string
+        type: array
+    required:
+    - name
+    - reference
+    type: object
+  entity.User:
+    properties:
+      bank_accounts:
+        items:
+          $ref: '#/definitions/entity.Bank'
+        type: array
+      cards:
+        items:
+          $ref: '#/definitions/entity.Card'
+        type: array
+      company_profile:
+        items:
+          $ref: '#/definitions/entity.CompanyProfile'
+        type: array
+      contacts:
+        items:
+          $ref: '#/definitions/entity.Contact'
+        type: array
+      created_on:
+        type: string
+      device:
+        $ref: '#/definitions/entity.Device'
+      is_active:
+        type: boolean
+      kyc:
+        $ref: '#/definitions/entity.Kyc'
+      notification_options:
+        $ref: '#/definitions/entity.NotificationOptions'
+      security:
+        $ref: '#/definitions/entity.Security'
+      updated_on:
+        type: string
+      user_profile:
+        $ref: '#/definitions/entity.UserProfile'
+      user_reference:
+        type: string
+      wallet:
+        $ref: '#/definitions/entity.Wallet'
+    type: object
+  entity.UserProfile:
+    properties:
+      address:
+        $ref: '#/definitions/entity.Address'
+      date_of_birth:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      full_name:
+        type: string
+      is_verified_email:
+        type: boolean
+      is_verified_phone:
+        type: boolean
+      last_name:
+        type: string
+      phone:
+        type: string
+      photos:
+        items:
+          $ref: '#/definitions/entity.Photo'
+        type: array
+      user_profile_reference:
+        type: string
+      walls_badge:
+        items:
+          $ref: '#/definitions/entity.WallsBadge'
+        type: array
+    type: object
+  entity.Wallet:
+    properties:
+      auto_fund:
+        type: boolean
+      auto_fund_amount:
+        type: number
+      auto_fund_level:
+        type: number
+      auto_withdrawal:
+        type: boolean
+      auto_withdrawal_amount:
+        type: number
+      auto_withdrawal_level:
+        type: number
+      balance:
+        $ref: '#/definitions/entity.Balance'
+      coupons:
+        items:
+          $ref: '#/definitions/entity.Coupon'
+        type: array
+      reward:
+        $ref: '#/definitions/entity.Reward'
+      tier:
+        $ref: '#/definitions/entity.Tier'
+      wallet_account_no:
+        type: integer
+      wallet_reference:
+        type: string
+    type: object
+  entity.WallsBadge:
+    properties:
+      active_for:
+        type: string
+      is_default:
+        type: boolean
+      is_enabled:
+        type: boolean
+      walls_badge_reference:
+        type: string
+      walls_tag:
+        type: string
+    type: object
+  helper.ErrorResponse:
+    properties:
+      code:
+        type: integer
+      error_reference:
+        type: string
+      error_type:
+        type: string
+      errors:
+        items:
+          type: string
+        type: array
+      timestamp:
+        type: string
+    type: object
+  shared.Channel:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - Sms
+    - Email
+  shared.DeviceType:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - Mobile
+    - Tablet
+    - Desktop
+  shared.IdentificationType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-varnames:
+    - InternationalPassport
+    - BVN
+    - NIN
+    - DriversLicence
+    - VotersCard
+  shared.IntegrationType:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - IntegrationType1
+    - IntegrationType2
+  shared.NotificationType:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - Instant
+    - Scheduled
+  shared.ProfileType:
+    enum:
+    - 0
+    - 1
+    type: integer
+    x-enum-varnames:
+    - User
+    - Company
+  shared.TierType:
+    enum:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    type: integer
+    x-enum-varnames:
+    - BumbleBee
+    - JazzBerry
+    - FunkyFlamingo
+    - JovialJaguar
+    - Nebula
+    - WorkingBee
+info:
+  contact: {}
+paths:
+  /api/user:
+    post:
+      consumes:
+      - application/json
+      description: Create a User
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: Create User request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateUserDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create User
+      tags:
+      - User
+  /api/user/{user_reference}:
+    get:
+      consumes:
+      - application/json
+      description: Get user details by reference
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/entity.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get User by Reference
+      tags:
+      - User
+  /api/user/{user_reference}/address:
+    put:
+      consumes:
+      - application/json
+      description: Update user's address
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: User address data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddressDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Address
+      tags:
+      - User
+  /api/user/{user_reference}/balance:
+    put:
+      consumes:
+      - application/json
+      description: Update the balance of a user
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Balance request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BalanceDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update Balance
+      tags:
+      - User
+  /api/user/{user_reference}/bank:
+    post:
+      consumes:
+      - application/json
+      description: Add a Bank to a User
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Bank request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BankDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Add Bank to User
+      tags:
+      - User
+  /api/user/{user_reference}/bank/{bank_reference}:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Bank Details
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Bank reference
+        in: path
+        name: bank_reference
+        required: true
+        type: string
+      - description: Bank request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.BankDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User's Bank
+      tags:
+      - User
+  /api/user/{user_reference}/bank/{bank_reference}/set-default:
+    put:
+      consumes:
+      - application/json
+      description: Set user's default bank
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Bank reference
+        in: path
+        name: bank_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Set Default bank for user
+      tags:
+      - User
+  /api/user/{user_reference}/card:
+    post:
+      consumes:
+      - application/json
+      description: Add a Card to a User
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Card request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CardDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Add Card to User
+      tags:
+      - User
+  /api/user/{user_reference}/card/{card_reference}:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Card
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Card reference
+        in: path
+        name: card_reference
+        required: true
+        type: string
+      - description: Card request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CardDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User's Card
+      tags:
+      - User
+  /api/user/{user_reference}/card/{card_reference}/set-default:
+    put:
+      consumes:
+      - application/json
+      description: Set user default Card
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Card reference
+        in: path
+        name: card_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Set Default Card for user
+      tags:
+      - User
+  /api/user/{user_reference}/company:
+    post:
+      consumes:
+      - application/json
+      description: Create a Company Profile
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Create Company Profile request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateCompanyProfileDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create Company Profile
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}:
+    put:
+      consumes:
+      - application/json
+      description: Update a Comapny Profile
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      - description: Update company profile request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateCompanyProfileDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update Comapny Profile
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/disable:
+    put:
+      consumes:
+      - application/json
+      description: Disable a Company Profile
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Disable Company Profile
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/email/update-status:
+    put:
+      consumes:
+      - application/json
+      description: Update company email verification status
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update Company Email Status
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/logo:
+    put:
+      consumes:
+      - application/json
+      description: Update a Comapny Logo
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      - description: Walls Badge request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateCompanyLogo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update Comapny Logo
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/walls-badge/{walls_badge_reference}/disable:
+    put:
+      consumes:
+      - application/json
+      description: Disable a Company Wallsbadge
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      - description: Walls Badge reference
+        in: path
+        name: walls_badge_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Disable Company Wallsbadge
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/walls-badge/default:
+    get:
+      consumes:
+      - application/json
+      description: Get the default wallsbadge for a company
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get default company walls badge
+      tags:
+      - Company
+  /api/user/{user_reference}/company/{company_reference}/walls-badges:
+    get:
+      consumes:
+      - application/json
+      description: Get all wallsbadges for a company
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Company reference
+        in: path
+        name: company_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              type: object
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get company Walls Badge List
+      tags:
+      - Company
+  /api/user/{user_reference}/company/walls-badge:
+    post:
+      consumes:
+      - application/json
+      description: Create a Company Walls Badge
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Walls Badge request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CompanyWallsBadgeDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create Company Walls Badge
+      tags:
+      - Company
+  /api/user/{user_reference}/contact:
+    post:
+      consumes:
+      - application/json
+      description: Add a contact
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Contact request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ContactDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Add Contact
+      tags:
+      - User
+  /api/user/{user_reference}/coupon:
+    put:
+      consumes:
+      - application/json
+      description: Add a coupon for the user
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Coupon request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CouponDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Add User coupon
+      tags:
+      - User
+  /api/user/{user_reference}/device:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Device
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Device request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateDeviceDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User's Device
+      tags:
+      - User
+  /api/user/{user_reference}/disable:
+    put:
+      consumes:
+      - application/json
+      description: Disable a user
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Disable User
+      tags:
+      - User
+  /api/user/{user_reference}/dob:
+    put:
+      consumes:
+      - application/json
+      description: Update user's date of birth
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: User date of birth data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DobDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Date of Birth
+      tags:
+      - User
+  /api/user/{user_reference}/email:
+    put:
+      consumes:
+      - application/json
+      description: Update user email
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: User email data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.EmailDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Email
+      tags:
+      - User
+  /api/user/{user_reference}/email/update-status:
+    put:
+      consumes:
+      - application/json
+      description: Update user email verification status
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Email Status
+      tags:
+      - User
+  /api/user/{user_reference}/enable:
+    put:
+      consumes:
+      - application/json
+      description: Enable a user
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Enable User
+      tags:
+      - User
+  /api/user/{user_reference}/identification:
+    post:
+      consumes:
+      - application/json
+      description: Add an identification
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Identification request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddIdentificationDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Add Identification
+      tags:
+      - User
+  /api/user/{user_reference}/identification/{identification_reference}:
+    put:
+      consumes:
+      - application/json
+      description: Update an identification
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Identification reference
+        in: path
+        name: identification_reference
+        required: true
+        type: string
+      - description: Identification request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddIdentificationDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update Identification
+      tags:
+      - User
+  /api/user/{user_reference}/kyc-score:
+    put:
+      consumes:
+      - application/json
+      description: Update the user's KYC score
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: KYC score
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.KycScoreDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User KYC Score
+      tags:
+      - User
+  /api/user/{user_reference}/kyc/update-status:
+    put:
+      consumes:
+      - application/json
+      description: Update user KYC verification status
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User KYC Status
+      tags:
+      - User
+  /api/user/{user_reference}/name:
+    put:
+      consumes:
+      - application/json
+      description: Update user name
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: User name data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserNameDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Name
+      tags:
+      - User
+  /api/user/{user_reference}/notification-options:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Notification Options
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Notification options request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateNotificationOptionsDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User's Notification Options
+      tags:
+      - User
+  /api/user/{user_reference}/phone/update-status:
+    put:
+      consumes:
+      - application/json
+      description: Update user Phone number verification status
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Phone Status
+      tags:
+      - User
+  /api/user/{user_reference}/photos:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Photos
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Photo request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.PhotoDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User's Photos
+      tags:
+      - User
+  /api/user/{user_reference}/reward:
+    put:
+      consumes:
+      - application/json
+      description: Update the user's rewards
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Reward request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.RewardDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Rewards
+      tags:
+      - User
+  /api/user/{user_reference}/tier:
+    put:
+      consumes:
+      - application/json
+      description: Update the user's tier
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Tier request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TierDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Tier
+      tags:
+      - User
+  /api/user/{user_reference}/user/walls-badge:
+    post:
+      consumes:
+      - application/json
+      description: Create a User Walls Badge
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Create User Walls Badge request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserWallsBadgeDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create User Walls Badge
+      tags:
+      - User
+  /api/user/{user_reference}/wallet:
+    put:
+      consumes:
+      - application/json
+      description: Update a User's Wallet
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: Wallet request body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateWalletDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Update User Wallet
+      tags:
+      - User
+  /api/user/{user_reference}/walls-badge/{walls_badge_reference}/disable:
+    put:
+      consumes:
+      - application/json
+      description: Disable a User Wallsbadge
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      - description: User Walls Badge reference
+        in: path
+        name: walls_badge_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Disable User Wallsbadge
+      tags:
+      - User
+  /api/user/{user_reference}/walls-badge/default:
+    get:
+      consumes:
+      - application/json
+      description: Get the default wallsbadge for a user
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get default user walls badge
+      tags:
+      - User
+  /api/user/{user_reference}/walls-badges:
+    get:
+      consumes:
+      - application/json
+      description: Get all wallsbadges for a user
+      parameters:
+      - description: User reference
+        in: path
+        name: user_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get user Walls Badge List
+      tags:
+      - User
+  /api/user/create-identity:
+    post:
+      consumes:
+      - application/json
+      description: Create Identity
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: Validate Otp Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.IdentityDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create Identity
+      tags:
+      - default
+  /api/user/device:
+    post:
+      consumes:
+      - application/json
+      description: Get user details by device
+      parameters:
+      - description: Device data
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.DeviceDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/entity.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get User by Device
+      tags:
+      - User
+  /api/user/phone/{phone}:
+    get:
+      consumes:
+      - application/json
+      description: Get user details by Phone
+      parameters:
+      - description: Phone
+        in: path
+        name: phone
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/entity.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get User by Phone
+      tags:
+      - User
+  /api/user/send-otp:
+    post:
+      consumes:
+      - application/json
+      description: Create Otp
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: Create Otp Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateOtpDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create Otp Request
+      tags:
+      - Otp
+  /api/user/upgrade-tier:
+    put:
+      consumes:
+      - application/json
+      description: Upgrade Tier
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: Validate Otp Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.TierUpgradeRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Upgrade Tier
+      tags:
+      - default
+  /api/user/user-reference:
+    get:
+      consumes:
+      - application/json
+      description: Validate Otp
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Create User Reference
+      tags:
+      - User Reference
+  /api/user/validate-otp:
+    post:
+      consumes:
+      - application/json
+      description: Validate Otp
+      parameters:
+      - description: User Reference
+        in: header
+        name: X-User-Reference
+        required: true
+        type: string
+      - description: Phone
+        in: header
+        name: X-Phone
+        required: true
+        type: string
+      - description: IMEI
+        in: header
+        name: X-Imei
+        required: true
+        type: string
+      - description: Device Type
+        in: header
+        name: X-Device-Type
+        required: true
+        type: string
+      - description: Device Brand
+        in: header
+        name: X-Device-Brand
+        required: true
+        type: string
+      - description: Device Model
+        in: header
+        name: X-Device-Model
+        required: true
+        type: string
+      - description: Device Reference
+        in: header
+        name: X-Device-Reference
+        required: true
+        type: string
+      - description: Validate Otp Request Body
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/dto.ValidateOtpDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Validate Otp
+      tags:
+      - Validate Otp
+  /api/user/walls-badge-reference/{walls_badge_reference}:
+    get:
+      consumes:
+      - application/json
+      description: Get user details by Badge Reference
+      parameters:
+      - description: Walls Badge Reference
+        in: path
+        name: walls_badge_reference
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/entity.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get User by Walls Badge Reference
+      tags:
+      - User
+  /api/user/walls-tag/{wallsTag}:
+    get:
+      consumes:
+      - application/json
+      description: Get user details by WallsTag
+      parameters:
+      - description: WallsTag
+        in: path
+        name: wallsTag
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/entity.User'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/helper.ErrorResponse'
+      summary: Get User by WallsTag
+      tags:
+      - User
+swagger: "2.0"
